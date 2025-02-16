@@ -1,9 +1,10 @@
 package com.nagarpalika.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-
+@Data
 @Entity
 @Table(name = "birth_certificates")
 public class BirthCertificate {

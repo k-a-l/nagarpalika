@@ -48,11 +48,26 @@ public class UserServiceImp implements UserService{
 
     @Override
     public UserDto updateUser(Long id, UserRequestDto userRequestDto) {
-        return null;
+        User existingUser = userRepository.findById(id).orElseThrow( ()->new IllegalStateException("User not found"));
+        existingUser.setUsername(userRequestDto.getUsername());
+        existingUser.setEmail(userRequestDto.getEmail());
+        existingUser.setPhone(userRequestDto.getPhone());
+        existingUser.setAddress(userRequestDto.getAddress());
+        existingUser.setIsActive(userRequestDto.getIsActive());
+        if (userRequestDto.getPassword() != null && !userRequestDto.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+        }
+        existingUser=userRepository.save(existingUser);
+
+        return UserMapper.toUserDto(existingUser);
     }
 
     @Override
     public boolean deleteUser(Long id) {
-        return false;
+        return userRepository.findById(id).map(user -> {
+            userRepository.delete(user);
+            return true;
+        }).orElse(false);
     }
 }
+

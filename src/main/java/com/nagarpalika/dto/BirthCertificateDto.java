@@ -13,5 +13,5 @@ public record BirthCertificateDto(
         String status, // Enum as String (ApplicationStatus)
         String rejectionReason,
         LocalDateTime appliedDate,
-        String applicantName // Assuming the applicant's name is included
+        String applicantName // Assuming the applicant's username
 ) {}
