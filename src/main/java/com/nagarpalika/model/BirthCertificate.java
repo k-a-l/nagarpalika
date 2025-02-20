@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "birth_certificates")
@@ -28,5 +30,9 @@ public class BirthCertificate {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User applicant;
+
+    @OneToMany
+    @JoinColumn(name = "documnets_id")
+    private List<Document> documents;
 
 }

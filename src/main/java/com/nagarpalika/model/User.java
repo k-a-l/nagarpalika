@@ -2,8 +2,8 @@ package com.nagarpalika.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.List;
+import com.nagarpalika.model.Document; // Ensure this is the correct import
 
 @Data
 @Entity
@@ -12,9 +12,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(unique = true, nullable = false)
     private String username;
+
     private String password;
+
     @Column(unique = false, nullable = false)
     private String email;
 
@@ -23,11 +26,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
     private Boolean isActive;
 
     @OneToMany(mappedBy = "uploadedBy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Document> documents;
-
-
-    }
-
+    private List<Document> documents; // Ensure this uses the correct Document class
+}

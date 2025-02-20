@@ -6,6 +6,8 @@ import com.nagarpalika.dto.BirthCertificateRequestDto;
 import java.util.List;
 
 public interface BirthCertificateService {
+
+    List<BirthCertificateDto> getAllBirthCertificates();
     // Create new birth certificate application
     BirthCertificateDto addBirthCertificate(BirthCertificateRequestDto request);
 

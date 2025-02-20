@@ -27,6 +27,16 @@ public class BirthCertificateServiceImp implements BirthCertificateService {
     private UserRepository userRepository; // Needed to fetch applicant details
 
     @Override
+    public List<BirthCertificateDto> getAllBirthCertificates() {
+
+     return birthCertificateRepository.findAll()
+              .stream()
+              .map(BirthCertificateMapper::toBirthCertificateDto)
+              .collect(Collectors.toList());
+
+    }
+
+    @Override
     public BirthCertificateDto addBirthCertificate(BirthCertificateRequestDto request) {
         User applicant = userRepository.findById(request.getApplicantId())
                 .orElseThrow(() -> new IllegalArgumentException("Applicant not found"));
